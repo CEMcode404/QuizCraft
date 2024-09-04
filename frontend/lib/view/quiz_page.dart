@@ -30,7 +30,7 @@ class QuizPage extends StatelessWidget {
                 controller: controller,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: "Enter paragraph",
+                  hintText: 'Enter paragraph',
                 ),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,

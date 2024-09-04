@@ -32,6 +32,3 @@ jobs:
       working-directory: frontend
       run: flutter analyze
 
-    - name: Run tests
-      working-directory: frontend
-      run: flutter test

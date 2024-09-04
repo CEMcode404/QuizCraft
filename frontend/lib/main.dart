@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'controller/quiz_controller.dart';
-import 'view/quiz_page.dart';
-import 'model/quiz_model.dart';
+import 'package:frontend/controller/quiz_controller.dart';
+import 'package:frontend/view/quiz_page.dart';
+import 'package:frontend/model/quiz_model.dart';
 
 void main() {
   runApp(const MyApp());

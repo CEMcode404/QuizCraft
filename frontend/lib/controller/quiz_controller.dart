@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../model/quiz_model.dart';
+import 'package:frontend/model/quiz_model.dart';
 
 class QuizController {
   Future<QuizModel?> generateQuiz(String paragraph) async {

@@ -1,0 +1,31 @@
+name: .NET Build and Analyze
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.401'
+
+    - name: Change directory to backend
+      run: cd frontend
+
+    - name: Install dependencies
+      working-directory: backend
+      run: dotnet restore
+
+    - name: Build
+      working-directory: backend=
+      run: dotnet build --no-restore
+
+    - name: Run analyzers
+      working-directory: backend
+      run: dotnet build --no-restore --no-incremental --verbosity diagnostic

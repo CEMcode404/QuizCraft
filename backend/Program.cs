@@ -1,10 +1,16 @@
+// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+#pragma warning disable SA1200 // Ignore SA1200 warning
+
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Env.Load(); 
+Env.Load();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 builder.Services.AddHttpClient();
@@ -39,18 +45,21 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
                 {
                     parts = new[]
                     {
-                        new { text = "Generate " + questions + " quiz questions from this paragraph: " + request.Paragraph +
+                        new
+                        {
+                            text = "Generate " + questions + " quiz questions from this paragraph: " + request.paragraph +
                         " After the question, add the answer" +
                         " In this format: \"1. Who painted the Mona Lisa? Leonardo Da Vinci\"" +
-                        " Not true or false, just questions, don't add unnecessary introductions"}
-                    }
-                }
-            }
+                        " Not true or false, just questions, don't add unnecessary introductions",
+                        },
+                    },
+                },
+            },
         };
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, apiUrl)
         {
-            Content = new StringContent(JsonSerializer.Serialize(requestContent), System.Text.Encoding.UTF8, "application/json")
+            Content = new StringContent(JsonSerializer.Serialize(requestContent), System.Text.Encoding.UTF8, "application/json"),
         };
 
         var response = await httpClient.SendAsync(httpRequest);
@@ -103,4 +112,4 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
 
 app.Run();
 
-record QuizRequest(string Paragraph);
+record QuizRequest(string paragraph);

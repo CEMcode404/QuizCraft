@@ -119,3 +119,5 @@ src/.vs/config/applicationhost.config
 
 bin/
 obj/
+/env
+*.env

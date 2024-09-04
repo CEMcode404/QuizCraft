@@ -1,6 +1,9 @@
-@backend_HostAddress = http://localhost:5139
+@backend_HostAddress = http://localhost:5000
 
-GET {{backend_HostAddress}}/weatherforecast/
+POST {{backend_HostAddress}}/generateQuiz
 Accept: application/json
+Content-Type: application/json
 
-###
+{
+  "paragraph": "This is the paragraph from which quiz questions will be generated."
+}

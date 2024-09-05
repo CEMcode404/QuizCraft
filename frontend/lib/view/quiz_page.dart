@@ -17,36 +17,39 @@ class QuizPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('QuizCraft'),
+        backgroundColor: Colors.lightBlue[50],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 20),
-            Expanded(
-              child: TextField(
-                controller: controller,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter paragraph',
-                ),
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                expands: true,
-                scrollPhysics: const BouncingScrollPhysics(),
-                textAlignVertical: TextAlignVertical.top,
-              ),
-            ),
-            const SizedBox(height: 300),
-            ElevatedButton(
-              onPressed: () => onGenerateQuiz(),
-              child: const Text('Generate'),
-            ),
-            if (quiz != null) ...[
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
               const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
+              SizedBox(
+                height: 200, // Set a fixed height for the TextField
+                child: TextField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Enter paragraph',
+                  ),
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  expands: true,
+                  textAlignVertical: TextAlignVertical.top,
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => onGenerateQuiz(),
+                child: const Text('Generate'),
+              ),
+              if (quiz != null) ...[
+                const SizedBox(height: 20),
+                SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: quiz!.entries.map((entry) {
@@ -60,11 +63,12 @@ class QuizPage extends StatelessWidget {
                     }).toList(),
                   ),
                 ),
-              ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
+      backgroundColor: Colors.lightBlue[50],
     );
   }
 }

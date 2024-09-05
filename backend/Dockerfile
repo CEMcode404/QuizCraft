@@ -5,11 +5,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0
 WORKDIR /workspace
 
 # Copy the project file and restore dependencies
-COPY ["backend/backend.csproj", "."]
+COPY ["/backend.csproj", "."]
 RUN dotnet restore "backend.csproj"
 
 # Copy the rest of the source code
-COPY backend/ .
+COPY / .
 
 # Expose the port the application runs on
 EXPOSE 5000

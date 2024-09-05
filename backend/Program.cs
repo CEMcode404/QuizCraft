@@ -36,6 +36,7 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
 {
     try
     {
+        Console.WriteLine("Hello, World!");
         string apiKey = Env.GetString("GEMINI_API_KEY")
             ?? throw new InvalidOperationException("Google API key is missing from configuration.");
 
@@ -55,7 +56,8 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
                             text = "Generate " + questions + " quiz questions from this paragraph: " + request.paragraph +
                         " After the question, add the answer" +
                         " In this format: \"1. Who painted the Mona Lisa? Leonardo Da Vinci\"" +
-                        " Not true or false, just questions, don't add unnecessary introductions",
+                        " Not true or false, just questions, don't add unnecessary introductions" +
+                        " Make the questions random",
                         },
                     },
                 },

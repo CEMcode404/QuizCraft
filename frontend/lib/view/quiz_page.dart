@@ -16,7 +16,6 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('QuizCraft'),
       ),
       body: Padding(
@@ -39,7 +38,7 @@ class QuizPage extends StatelessWidget {
                 textAlignVertical: TextAlignVertical.top,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 300),
             ElevatedButton(
               onPressed: () => onGenerateQuiz(),
               child: const Text('Generate'),

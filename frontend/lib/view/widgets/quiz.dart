@@ -19,7 +19,8 @@ class MyQuizPageState extends State<MyQuizPage> {
 
   Future<void> _generateQuiz() async {
     try {
-      final quizModel = await _quizController.generateQuiz(_controller.text);
+      final quizModel =
+          await _quizController.generateQuiz(context, _controller.text);
       setState(() {
         _quizModel = quizModel;
       });

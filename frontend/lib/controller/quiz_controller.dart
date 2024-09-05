@@ -1,9 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:frontend/model/quiz_model.dart';
+import 'package:frontend/view/widgets/utils/error.dart'; // Import your error dialog here
 
 class QuizController {
-  Future<QuizModel?> generateQuiz(String paragraph) async {
+  Future<QuizModel?> generateQuiz(
+      BuildContext context, String paragraph) async {
+    if (paragraph.trim().isEmpty) {
+      showErrorDialog(context, 'Paragraph cannot be empty');
+      return null;
+    }
+
     final response = await http.post(
       Uri.parse(
           'https://a1ce-115-85-43-90.ngrok-free.app/generateQuiz'), //this is dynamic FIX

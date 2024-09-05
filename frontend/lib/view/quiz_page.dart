@@ -16,7 +16,11 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QuizCraft'),
+        title: const Text(
+          'QuizCraft',
+          style: TextStyle(
+              fontFamily: 'Arial', fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.lightBlue[50],
       ),
       body: SingleChildScrollView(

@@ -1,0 +1,22 @@
+{
+    "name": "My Dev Container",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "backend",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-dotnettools.csharp",
+          "Dart-Code.flutter"
+        ],
+        "settings": {
+          "terminal.integrated.shell.linux": "/bin/bash"
+        }
+      }
+    },
+    "postCreateCommand": "dotnet restore",
+    "forwardPorts": [5000],
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ]
+  }

@@ -10,6 +10,11 @@ using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5000);
+});
+
 Env.Load();
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);

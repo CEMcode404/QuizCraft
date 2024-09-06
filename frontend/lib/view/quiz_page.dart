@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:frontend/view/widgets/utils/error_dialog.dart';
 
 class QuizPage extends StatelessWidget {
@@ -30,12 +31,16 @@ class QuizPage extends StatelessWidget {
         );
       });
     }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'QuizCraft',
           style: TextStyle(
-              fontFamily: 'Arial', fontSize: 20, fontWeight: FontWeight.bold),
+            fontFamily: 'Arial',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Colors.orangeAccent,
       ),
@@ -47,7 +52,7 @@ class QuizPage extends StatelessWidget {
             children: <Widget>[
               const SizedBox(height: 20),
               SizedBox(
-                height: 200, // Set a fixed height for the TextField
+                height: 500,
                 child: TextField(
                   controller: controller,
                   decoration: const InputDecoration(
@@ -74,17 +79,45 @@ class QuizPage extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
               if (quiz != null) ...[
-                const SizedBox(height: 20),
                 SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: quiz!.entries.map((entry) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          '${entry.key}\n${entry.value}',
-                          style: const TextStyle(fontSize: 16),
+                        child: FlipCard(
+                          front: Container(
+                            width: double.infinity,
+                            height: 150,
+                            color: Colors.blue,
+                            child: Center(
+                              child: Text(
+                                entry.key,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          back: Container(
+                            width: double.infinity,
+                            height: 150,
+                            color: Colors.red,
+                            child: Center(
+                              child: Text(
+                                entry.value,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     }).toList(),

@@ -55,7 +55,8 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
                             text = "Generate " + questions + " quiz questions from this paragraph: " + request.paragraph +
                         " After the question, add the answer" +
                         " In this format: \"1. Who painted the Mona Lisa? Leonardo Da Vinci\"" +
-                        " Not true or false, just questions, don't add unnecessary introductions",
+                        " Not true or false, just questions, don't add unnecessary introductions" +
+                        " Make the questions random",
                         },
                     },
                 },
@@ -84,6 +85,8 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
         var pattern = @"(\d+\.\s.*?\?)\s*\*\*(.*?)\*\*";
         var regex = new Regex(pattern, RegexOptions.Singleline);
 
+        bool isEmptyQuestions = true;
+
         if (text != null)
         {
             foreach (Match match in regex.Matches(text))
@@ -93,11 +96,12 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
                     string question = match.Groups[1].Value.Trim();
                     string answer = match.Groups[2].Value.Trim();
                     result[question] = answer;
+                    isEmptyQuestions = false;
                 }
             }
         }
 
-        return Results.Ok(new { q_and_a = result });
+        return Results.Ok(new { q_and_a = result, isEmptyQuestions });
     }
     catch (HttpRequestException httpEx)
     {

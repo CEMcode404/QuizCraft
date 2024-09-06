@@ -36,7 +36,6 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
 {
     try
     {
-        Console.WriteLine("Hello, World!");
         string apiKey = Env.GetString("GEMINI_API_KEY")
             ?? throw new InvalidOperationException("Google API key is missing from configuration.");
 
@@ -86,6 +85,8 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
         var pattern = @"(\d+\.\s.*?\?)\s*\*\*(.*?)\*\*";
         var regex = new Regex(pattern, RegexOptions.Singleline);
 
+        bool isEmptyQuestions = true;
+
         if (text != null)
         {
             foreach (Match match in regex.Matches(text))
@@ -95,11 +96,12 @@ app.MapPost("/generateQuiz", static async (QuizRequest request, HttpClient httpC
                     string question = match.Groups[1].Value.Trim();
                     string answer = match.Groups[2].Value.Trim();
                     result[question] = answer;
+                    isEmptyQuestions = false;
                 }
             }
         }
 
-        return Results.Ok(new { q_and_a = result });
+        return Results.Ok(new { q_and_a = result, isEmptyQuestions });
     }
     catch (HttpRequestException httpEx)
     {

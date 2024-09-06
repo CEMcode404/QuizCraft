@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/view/widgets/utils/error_dialog.dart';
 
 class QuizPage extends StatelessWidget {
   final TextEditingController controller;
   final Function onGenerateQuiz;
   final Map<String, String>? quiz;
+  final bool? isEmptyQuestions;
 
   const QuizPage({
     super.key,
     required this.controller,
     required this.onGenerateQuiz,
     required this.quiz,
+    required this.isEmptyQuestions,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (isEmptyQuestions == true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ErrorDialog(
+              message:
+                  'No quiz questions generated. Please enter a valid paragraph.',
+            );
+          },
+        );
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -21,7 +37,7 @@ class QuizPage extends StatelessWidget {
           style: TextStyle(
               fontFamily: 'Arial', fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.lightBlue[50],
+        backgroundColor: Colors.orangeAccent,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,7 +65,14 @@ class QuizPage extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => onGenerateQuiz(),
-                child: const Text('Generate'),
+                child: const Text(
+                  'Generate',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               if (quiz != null) ...[
                 const SizedBox(height: 20),
@@ -72,7 +95,7 @@ class QuizPage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.lightBlue[50],
+      backgroundColor: Colors.white,
     );
   }
 }

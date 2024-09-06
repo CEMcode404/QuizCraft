@@ -24,6 +24,7 @@ class MyQuizPageState extends State<MyQuizPage> {
       setState(() {
         _quizModel = quizModel;
       });
+      print(quizModel?.isEmptyQuestions);
     } catch (e) {
       log('Error generating quiz: $e');
     }
@@ -35,6 +36,7 @@ class MyQuizPageState extends State<MyQuizPage> {
       controller: _controller,
       onGenerateQuiz: _generateQuiz,
       quiz: _quizModel?.questionsAndAnswers,
+      isEmptyQuestions: _quizModel?.isEmptyQuestions,
     );
   }
 }

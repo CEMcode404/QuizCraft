@@ -49,13 +49,13 @@ class HomePage extends StatelessWidget {
               child: Icon(
                 Icons.arrow_forward,
                 size: 30,
-                color: Colors.purple,
+                color: Colors.orangeAccent,
               ),
             ),
           ],
         ),
       ),
-      backgroundColor: Colors.lightBlue[50],
+      backgroundColor: Colors.white,
     );
   }
 }
